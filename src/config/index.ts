@@ -124,7 +124,7 @@ export default {
   MAX_SESSION_MINUTES: parseEnvNumber("MAX_SESSION_MINUTES") || 300, // Thời gian 1 session
 
   // ID of developer's Facebook account
-  DEV_ID: parseEnvString("DEV_ID") || "107155444423186",
+  DEV_ID: parseEnvString("DEV_ID") || "104115094799079",
 
   // Project version. You don't need to set this.
   VERSION: require("../../package.json").version,

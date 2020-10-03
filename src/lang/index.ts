@@ -1,7 +1,7 @@
 export default {
   MAINTENANCE: '[BOT] Server hiện đang bảo trì...',
 
-  FIRST_COME: '[BOT] Chào mừng bạn đến với Hutech Stranger. Trước khi bắt đầu, hãy chắc chắn rằng bạn đã chọn đúng giới tính người muốn chat cùng.\n\nẤn trợ giúp (hoặc gửi Trợ giúp) để xem thêm.',
+  FIRST_COME: '[BOT] Chào mừng bạn đến với Lost Found - . Trước khi bắt đầu, hãy chắc chắn rằng bạn đã chọn đúng giới tính người muốn chat cùng.\n\nẤn trợ giúp (hoặc gửi Trợ giúp) để xem thêm.',
 
   INSTRUCTION: '[BOT] Gửi "Bắt đầu chat" hoặc bấm vào nút để Tìm bạn Chat ngẫu nhiên.',
 

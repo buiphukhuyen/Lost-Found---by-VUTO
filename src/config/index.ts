@@ -93,7 +93,7 @@ export default {
   // URI to MongoDB server
   MONGO_URI:
     parseEnvString("MONGO_URI") ||
-    'mongo "mongodb+ srv://cluster0.2hegh.mongodb.net/lostfound" --username khuyenpb',
+    "mongodb+srv://khuyenpb:0333093935hutech@cluster0.2hegh.mongodb.net/lostfound?retryWrites=true&w=majority",
 
   // Logging stuffs
   HAS_POST_LOG: parseEnvBoolean("HAS_POST_LOG") || true,

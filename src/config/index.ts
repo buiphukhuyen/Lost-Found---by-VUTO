@@ -75,7 +75,7 @@ export default {
   // Page access token
   PAGE_ACCESS_TOKEN:
     parseEnvString("PAGE_ACCESS_TOKEN") ||
-    "EAAEpIvH47LIBAK3lHGsm574BfxvrQ0QroKyZAhmA8ZB8aXOobyKNtxHVPDjXpAuZAhSkDagMwgrY4XhOIoz5bCK4FnAZAc4jIMPBUomwUZCZCN8ASZBkNdElYC6jyfvAoOWb5ppJZCeMUeYFFUL3DySsthzlkI6H81fYXKlZBDdIOGD3OxmhzXGZBdN9TZBw19hkxIZD",
+    "EAAEpIvH47LIBAIV30woADoXSrk1LeShgj5pGIZCpKqgQLkC5abbb6ryeHHFxeXdnDtceFzs4bj69evxHasSTBzivCUyEixogaSsbhYVZBay8is4N5PZCilkc1ZBhPMOals5lVPrTCtp5D42k9uOs3ivdNVr3F19HrcZC64b5310mD3o94yTLdSN7DtXSnSSMZD",
 
   // Page verify token
   PAGE_VERIFY_TOKEN: parseEnvString("PAGE_VERIFY_TOKEN") || "khuyenpb",

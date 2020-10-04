@@ -66,7 +66,7 @@ export default {
   MAINTENANCE: parseEnvBoolean("MAINTENANCE") || false,
 
   // Graph API
-  GRAPH_API: parseEnvString("GRAPH_API") || "https://graph.facebook.com/v7.0",
+  GRAPH_API: parseEnvString("GRAPH_API") || "https://graph.facebook.com/v8.0",
 
   // App secret
   APP_SECRET:

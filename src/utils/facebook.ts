@@ -34,36 +34,31 @@ const persistent_menu = [
     composer_input_disabled: false,
     call_to_actions: [
       {
-        title: "Chức Năng",
-        type: "nested",
-        call_to_actions: [
-          {
-            title: "Chat ngẫu nhiên",
-            type: "postback",
-            payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
-          },
-          {
-            title: "Tìm Nam",
-            type: "postback",
-            payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
-          },
-          {
-            title: "Tìm Nữ",
-            type: "postback",
-            payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
-          },
-          {
-            title: "Tìm LGBT",
-            type: "postback",
-            payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LGBT,
-          },
-          {
-            title: "Kết Thúc",
-            type: "postback",
-            payload: lang.KEYWORD_END,
-          },
-        ],
+        title: "Chat ngẫu nhiên",
+        type: "postback",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
       },
+      {
+        title: "Tìm Nam",
+        type: "postback",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
+      },
+      {
+        title: "Tìm Nữ",
+        type: "postback",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
+      },
+      {
+        title: "Tìm LGBT",
+        type: "postback",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LGBT,
+      },
+      {
+        title: "Kết Thúc",
+        type: "postback",
+        payload: lang.KEYWORD_END,
+      },
+      ,
       {
         title: "Trợ Giúp",
         type: "postback",

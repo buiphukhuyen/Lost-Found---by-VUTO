@@ -58,7 +58,6 @@ const persistent_menu = [
         type: "postback",
         payload: lang.KEYWORD_END,
       },
-      ,
       {
         title: "Trợ Giúp",
         type: "postback",
@@ -221,7 +220,7 @@ const setMessengerProfile = async (): Promise<void> => {
       "facebook::setMessengerProfile",
       "Failed to send request to Facebook",
       err,
-      true
+      true  
     );
   }
 };

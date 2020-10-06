@@ -99,15 +99,15 @@ export default {
   HAS_POST_LOG: parseEnvBoolean("HAS_POST_LOG") || true,
   POST_LOG_ID:
     parseEnvString("POST_LOG_ID") ||
-    "1FAIpQLSfhQjxfruJHLfItCAUzaK_vs4q2QtDZFM9HMnclV7nkdWNTcw",
-  POST_LOG_P1: parseEnvString("POST_LOG_P1") || "2012584804",
-  POST_LOG_P2: parseEnvString("POST_LOG_P2") || "857388838",
-  POST_LOG_NAME1: parseEnvString("POST_LOG_NAME1") || "868192852",
-  POST_LOG_NAME2: parseEnvString("POST_LOG_NAME2") || "1595389381",
+    "1FAIpQLScv_pdfuWWxta37lIEX7qRH_KgEYTWD3CF_ukO7tXDKgURBgw",
+  POST_LOG_P1: parseEnvString("POST_LOG_P1") || "1488333688",
+  POST_LOG_P2: parseEnvString("POST_LOG_P2") || "2036205202",
+  POST_LOG_NAME1: parseEnvString("POST_LOG_NAME1") || "1882464234",
+  POST_LOG_NAME2: parseEnvString("POST_LOG_NAME2") || "1965452297",
 
   // Link to Google Form for reporting
   REPORT_LINK:
-    parseEnvString("REPORT_LINK") || "https://forms.gle/NMfVivhiw5HVjPjL6",
+    parseEnvString("REPORT_LINK") || "https://forms.gle/VksFPkYsgU62fkVS6",
 
   // Maximum number of people in wait room
   MAX_PEOPLE_IN_WAITROOM: parseEnvNumber("MAX_PEOPLE_IN_WAITROOM") || 30,

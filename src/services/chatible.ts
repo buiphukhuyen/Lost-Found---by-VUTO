@@ -3,16 +3,19 @@
  * @packageDocumentation
  */
 
-import db from '../db';
-import lang from '../lang';
-import config from '../config';
+import db from "../db";
+import lang from "../lang";
+import config from "../config";
 
-import fb from '../utils/facebook';
-import logger from '../utils/logger';
-import gifts from '../utils/gifts';
+import fb from "../utils/facebook";
+import logger from "../utils/logger";
+import gifts from "../utils/gifts";
 
-import GenderEnum from '../enums/GenderEnum';
-import { WebhookMessagingEvent, WebhookMessageObject } from '../interfaces/FacebookAPI';
+import GenderEnum from "../enums/GenderEnum";
+import {
+  WebhookMessagingEvent,
+  WebhookMessageObject,
+} from "../interfaces/FacebookAPI";
 
 /**
  * Parse string to get gender
@@ -23,12 +26,17 @@ const parseGender = (genderString: string): GenderEnum | null => {
   let res: GenderEnum | null;
   if (genderString === lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE) {
     res = GenderEnum.FEMALE;
-  } else if (genderString === lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE) {
+  } else if (
+    genderString ===
+    lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE
+  ) {
     res = GenderEnum.MALE;
   } else if (genderString === lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH) {
     res = GenderEnum.UNKNOWN;
-  } else if (genderString === lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LGBT) {
-    res = GenderEnum.LGBT;
+  } else if (genderString === lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY) {
+    res = GenderEnum.GAY;
+  } else if (genderString === lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES) {
+    res = GenderEnum.LES;
   } else {
     res = null;
   }
@@ -47,16 +55,18 @@ const getGender = async (id: string): Promise<GenderEnum> => {
     return gender;
   }
 
-  // not found in database, fetch from facebook
+  //Không tìm thấy dữ liệu, lấy ID dựa vào Facebook API
   const data = await fb.getUserData(id);
   if (data.error || !data.gender) {
     gender = GenderEnum.UNKNOWN;
-  } else if (data.gender === 'male') {
+  } else if (data.gender === "male") {
     gender = GenderEnum.MALE;
-  } else if (data.gender === 'female') {
+  } else if (data.gender === "female") {
     gender = GenderEnum.FEMALE;
-  } else if (data.gender === 'lgbt') {
-    gender = GenderEnum.LGBT;
+  } else if (data.gender === "gay") {
+    gender = GenderEnum.GAY;
+  } else if (data.gender === "les") {
+    gender = GenderEnum.LES;
   }
 
   await db.setGender(id, gender as GenderEnum);
@@ -70,14 +80,19 @@ const getGender = async (id: string): Promise<GenderEnum> => {
  * @param gender1 - Gender of first user
  * @param gender2 - Gender of second user
  */
-const pairPeople = async (id1: string, id2: string, gender1: GenderEnum, gender2: GenderEnum): Promise<void> => {
+const pairPeople = async (
+  id1: string,
+  id2: string,
+  gender1: GenderEnum,
+  gender2: GenderEnum
+): Promise<void> => {
   await db.removeFromWaitRoom(id1);
   await db.removeFromWaitRoom(id2);
   await db.writeToChatRoom(id1, id2, gender1, gender2);
   await db.updateLastPerson(id1, id2);
   await db.updateLastPerson(id2, id1);
-  await fb.sendTextMessage('', id1, lang.CONNECTED, false);
-  await fb.sendTextMessage('', id2, lang.CONNECTED, false);
+  await fb.sendTextMessage("", id1, lang.CONNECTED, false);
+  await fb.sendTextMessage("", id2, lang.CONNECTED, false);
   await logger.logPair(id1, id2);
 };
 
@@ -95,7 +110,10 @@ const findPair = async (id: string, myGender: GenderEnum): Promise<void> => {
     const targetGender = entry.gender;
 
     //Kiểm tra nếu đã gặp bạn Chat trước đó
-    if ((await db.checkLastPerson(id, target)) || (await db.checkLastPerson(target, id))) {
+    if (
+      (await db.checkLastPerson(id, target)) ||
+      (await db.checkLastPerson(target, id))
+    ) {
       continue;
     }
 
@@ -104,15 +122,19 @@ const findPair = async (id: string, myGender: GenderEnum): Promise<void> => {
     // Giới tính không rõ
 
     const isPreferredGender =
-      (myGender === GenderEnum.UNKNOWN && targetGender === GenderEnum.UNKNOWN) ||
+      (myGender === GenderEnum.UNKNOWN &&
+        targetGender === GenderEnum.UNKNOWN) ||
       (myGender === GenderEnum.MALE && targetGender === GenderEnum.FEMALE) ||
       (myGender === GenderEnum.FEMALE && targetGender === GenderEnum.MALE) ||
-      (myGender === GenderEnum.LGBT && targetGender === GenderEnum.LGBT);
+      (myGender === GenderEnum.GAY && targetGender === GenderEnum.GAY) ||
+      (myGender === GenderEnum.LES && targetGender === GenderEnum.LES);
 
     if (
       isPreferredGender ||
       //waitRoomList.length > config.MAX_PEOPLE_IN_WAITROOM || //Tắt chờ
-      ((myGender === GenderEnum.UNKNOWN || targetGender === GenderEnum.UNKNOWN) && Math.random() > 0.8)
+      ((myGender === GenderEnum.UNKNOWN ||
+        targetGender === GenderEnum.UNKNOWN) &&
+        Math.random() > 0.8)
     ) {
       await pairPeople(id, target, myGender, targetGender);
       return;
@@ -123,9 +145,9 @@ const findPair = async (id: string, myGender: GenderEnum): Promise<void> => {
   await db.writeToWaitRoom(id, myGender);
 
   if (myGender === GenderEnum.UNKNOWN) {
-    await fb.sendTextMessage('', id, lang.START_WARN_GENDER, false);
+    await fb.sendTextMessage("", id, lang.START_WARN_GENDER, false);
   }
-  await fb.sendTextMessage('', id, lang.START_OKAY, false);
+  await fb.sendTextMessage("", id, lang.START_OKAY, false);
 };
 
 /**
@@ -135,18 +157,10 @@ const findPair = async (id: string, myGender: GenderEnum): Promise<void> => {
  */
 const processEndChat = async (id1: string, id2: string): Promise<void> => {
   await db.removeFromChatRoom(id1); // or await db.removeFromChatRoom(id2);
-  await fb.sendTextButtons(
-    id1,
-    lang.END_CHAT + '\n[Thông tin thêm] ID của bạn vừa kết thúc là: ' + id2,
-    true,
-    true,
-    true,
-    true,
-    false
-  );
+  await fb.sendTextButtons(id1, lang.END_CHAT, true, true, true, true, false);
   await fb.sendTextButtons(
     id2,
-    lang.END_CHAT_PARTNER + '\n[Thông tin thêm] ID của bạn vừa kết thúc là: ' + id1,
+    lang.END_CHAT_PARTNER,
     true,
     true,
     true,
@@ -161,11 +175,15 @@ const processEndChat = async (id1: string, id2: string): Promise<void> => {
  * @param receiver - ID of receiver
  * @param data - Message data to forward
  */
-const forwardMessage = async (sender: string, receiver: string, data: WebhookMessageObject): Promise<void> => {
+const forwardMessage = async (
+  sender: string,
+  receiver: string,
+  data: WebhookMessageObject
+): Promise<void> => {
   if (data.attachments) {
     if (data.attachments[0]) {
       const type = data.attachments[0].type;
-      if (type === 'fallback') {
+      if (type === "fallback") {
         let text: string;
         if (data.text) {
           text = data.text;
@@ -173,18 +191,44 @@ const forwardMessage = async (sender: string, receiver: string, data: WebhookMes
           text = lang.ATTACHMENT_LINK + data.attachments[0].payload.url;
         }
         await fb.sendTextMessage(sender, receiver, text, true);
-      } else if (type === 'image' || type === 'video' || type === 'audio' || type === 'file') {
-        await fb.sendAttachment(sender, receiver, type, data.attachments[0].payload.url, false, false, true);
+      } else if (
+        type === "image" ||
+        type === "video" ||
+        type === "audio" ||
+        type === "file"
+      ) {
+        await fb.sendAttachment(
+          sender,
+          receiver,
+          type,
+          data.attachments[0].payload.url,
+          false,
+          false,
+          true
+        );
       } else {
-        await fb.sendTextMessage('', sender, lang.ERR_ATTACHMENT, false);
+        await fb.sendTextMessage("", sender, lang.ERR_ATTACHMENT, false);
         return;
       }
     }
 
     for (let i = 1; i < data.attachments.length; i++) {
       const type = data.attachments[i].type;
-      if (type === 'image' || type === 'video' || type === 'audio' || type === 'file') {
-        await fb.sendAttachment(sender, receiver, type, data.attachments[i].payload.url, false, false, true);
+      if (
+        type === "image" ||
+        type === "video" ||
+        type === "audio" ||
+        type === "file"
+      ) {
+        await fb.sendAttachment(
+          sender,
+          receiver,
+          type,
+          data.attachments[i].payload.url,
+          false,
+          false,
+          true
+        );
       }
     }
   } else {
@@ -198,14 +242,14 @@ const forwardMessage = async (sender: string, receiver: string, data: WebhookMes
  */
 const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   if (event.read) {
-    event.message = { text: '' };
+    event.message = { text: "" };
   }
 
   if (event.postback && event.postback.payload) {
     event.message = { text: event.postback.payload };
   }
 
-  if (!event.hasOwnProperty('message') || event.delivery) {
+  if (!event.hasOwnProperty("message") || event.delivery) {
     return;
   }
 
@@ -216,24 +260,32 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   const sender: string = event.sender.id;
 
   if (config.MAINTENANCE) {
-    await fb.sendTextMessage('', sender, lang.MAINTENANCE, false);
+    await fb.sendTextMessage("", sender, lang.MAINTENANCE, false);
     return;
   }
 
-  let text = '';
+  let text = "";
   if (event.message.quick_reply && event.message.quick_reply.payload) {
     text = event.message.quick_reply.payload;
   } else if (event.message.text) {
     text = event.message.text;
   }
 
-  let command = '';
+  let command = "";
   if (text.length < 20) {
-    command = text.toLowerCase().replace(/ /g, '');
+    command = text.toLowerCase().replace(/ /g, "");
   }
 
-  if (command === 'ʬ') {
-    await fb.sendTextButtons(sender, lang.FIRST_COME, true, false, true, true, false);
+  if (command === "ʬ") {
+    await fb.sendTextButtons(
+      sender,
+      lang.FIRST_COME,
+      true,
+      false,
+      true,
+      true,
+      false
+    );
     return;
   }
 
@@ -249,58 +301,121 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } else if (command.startsWith(lang.KEYWORD_GENDER)) {
       const gender: GenderEnum | null = parseGender(command);
       if (gender === null) {
-        await fb.sendTextButtons(sender, lang.GENDER_ERR, false, false, true, true, false);
+        await fb.sendTextButtons(
+          sender,
+          lang.GENDER_ERR,
+          false,
+          false,
+          true,
+          true,
+          false
+        );
       } else {
-        let genderString = '';
+        let genderString = "";
         if (gender === GenderEnum.MALE) {
           genderString = lang.GENDER_ARR_FEMALE;
         } else if (gender === GenderEnum.FEMALE) {
           genderString = lang.GENDER_ARR_MALE;
-        } else if (gender === GenderEnum.LGBT) {
-          genderString = lang.GENDER_ARR_LGBT;
+        } else if (gender === GenderEnum.GAY) {
+          genderString = lang.GENDER_ARR_GAY;
+        } else if (gender === GenderEnum.LES) {
+          genderString = lang.GENDER_ARR_LES;
         }
 
         if (gender !== GenderEnum.UNKNOWN) {
-          await fb.sendTextMessage('', sender, lang.GENDER_WRITE_OK + genderString + lang.GENDER_WRITE_WARN, false);
+          await fb.sendTextMessage(
+            "",
+            sender,
+            lang.GENDER_WRITE_OK + genderString + lang.GENDER_WRITE_WARN,
+            false
+          );
         }
 
         await db.setGender(sender, gender);
         await findPair(sender, gender);
       }
     } else if (command === lang.KEYWORD_HELP) {
-      await fb.sendTextButtons(sender, lang.HELP_TXT, true, false, true, true, false);
+      await fb.sendTextButtons(
+        sender,
+        lang.HELP_TXT,
+        true,
+        false,
+        true,
+        true,
+        false
+      );
     } else if (!event.read) {
-      await fb.sendTextButtons(sender, lang.INSTRUCTION, true, false, true, true, false);
+      await fb.sendTextButtons(
+        sender,
+        lang.INSTRUCTION,
+        true,
+        false,
+        true,
+        true,
+        false
+      );
     }
   } else if (waitState && sender2 === null) {
     // in wait room and waiting
     if (command === lang.KEYWORD_END) {
       await db.removeFromWaitRoom(sender);
-      await fb.sendTextButtons(sender, lang.END_CHAT, true, false, true, true, false);
+      await fb.sendTextButtons(
+        sender,
+        lang.END_CHAT,
+        true,
+        false,
+        true,
+        true,
+        false
+      );
     } else if (command === lang.KEYWORD_HELP) {
-      await fb.sendTextButtons(sender, lang.HELP_TXT, false, false, true, false, false);
+      await fb.sendTextButtons(
+        sender,
+        lang.HELP_TXT,
+        false,
+        false,
+        true,
+        false,
+        false
+      );
     } else if (!event.read) {
-      await fb.sendTextButtons(sender, lang.WAITING, false, false, true, false, false);
+      await fb.sendTextButtons(
+        sender,
+        lang.WAITING,
+        false,
+        false,
+        true,
+        false,
+        false
+      );
     }
   } else if (!waitState && sender2 !== null) {
     // in chat room
     if (command === lang.KEYWORD_END) {
-      
       await processEndChat(sender, sender2);
     } else if (
       command === lang.KEYWORD_START ||
       command === lang.KEYWORD_FIND_MALE ||
       command === lang.KEYWORD_FIND_FEMALE ||
-      command === lang.KEYWORD_FIND_LGBT
+      command === lang.KEYWORD_FIND_GAY ||
+      command === lang.KEYWORD_FIND_LES
     ) {
-      await fb.sendTextMessage('', sender, lang.START_ERR_ALREADY, false);
+      await fb.sendTextMessage("", sender, lang.START_ERR_ALREADY, false);
     } else if (command === lang.KEYWORD_HELP) {
-      await fb.sendTextButtons(sender, lang.HELP_TXT, false, true, true, false, false);
+      await fb.sendTextButtons(
+        sender,
+        lang.HELP_TXT,
+        false,
+        true,
+        true,
+        false,
+        false
+      );
     } else {
       if (event.read) {
         await fb.sendSeenIndicator(sender2);
-      } else if (text.trim().toLowerCase().startsWith('[bot]')) {
-        await fb.sendTextMessage('', sender, lang.ERR_FAKE_MSG, false);
+      } else if (text.trim().toLowerCase().startsWith("[bot]")) {
+        await fb.sendTextMessage("", sender, lang.ERR_FAKE_MSG, false);
       } else {
         await forwardMessage(sender, sender2, event.message);
       }
@@ -308,7 +423,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   } else {
     await db.removeFromWaitRoom(sender);
     await db.removeFromChatRoom(sender);
-    await fb.sendTextMessage('', sender, lang.ERR_UNKNOWN, false);
+    await fb.sendTextMessage("", sender, lang.ERR_UNKNOWN, false);
   }
 };
 
@@ -321,14 +436,25 @@ const removeTimeoutUser = async (): Promise<void> => {
 
   const now = new Date();
   waitRoomList.forEach(async (entry) => {
-    if (now.getTime() - entry.time.getTime() > config.MAX_WAIT_TIME_MINUTES * 60000) {
+    if (
+      now.getTime() - entry.time.getTime() >
+      config.MAX_WAIT_TIME_MINUTES * 60000
+    ) {
       await db.removeFromWaitRoom(entry.id);
-      await fb.sendTextButtons(entry.id, lang.END_CHAT_FORCE, true, false, true, true, false);
+      await fb.sendTextButtons(
+        entry.id,
+        lang.END_CHAT_FORCE,
+        true,
+        false,
+        true,
+        true,
+        false
+      );
     }
   });
 };
 
 export default {
   processEvent,
-  removeTimeoutUser
+  removeTimeoutUser,
 };

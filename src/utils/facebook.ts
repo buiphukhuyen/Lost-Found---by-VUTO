@@ -34,26 +34,6 @@ const persistent_menu = [
     composer_input_disabled: false,
     call_to_actions: [
       {
-        title: "Chat ngẫu nhiên",
-        type: "postback",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
-      },
-      {
-        title: "Tìm Nam",
-        type: "postback",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
-      },
-      {
-        title: "Tìm Nữ",
-        type: "postback",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
-      },
-      {
-        title: "Tìm LGBT",
-        type: "postback",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LGBT,
-      },
-      {
         title: "Kết Thúc",
         type: "postback",
         payload: lang.KEYWORD_END,
@@ -88,18 +68,23 @@ const quick_buttons_genders: Array<SendQuickReply> = [
   },
   {
     content_type: "text",
-    title: "Tìm Nam",
+    title: "Nữ - Nam",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
   },
   {
     content_type: "text",
-    title: "Tìm Nữ",
+    title: "Nam - Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
   },
   {
     content_type: "text",
-    title: "Tìm LGBT",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LGBT,
+    title: "Nam - Nam",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
+  },
+  {
+    content_type: "text",
+    title: "Nữ - Nữ",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
   },
 ];
 
@@ -220,7 +205,7 @@ const setMessengerProfile = async (): Promise<void> => {
       "facebook::setMessengerProfile",
       "Failed to send request to Facebook",
       err,
-      true  
+      true
     );
   }
 };

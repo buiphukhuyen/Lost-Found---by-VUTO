@@ -14,9 +14,10 @@ export default {
     "- Trợ giúp: Xem trợ giúp\n" +
     " Các lệnh có thể dùng khi đang không chat:\n" +
     "- Chat ngẫu nhiên: Tìm bạn ngẫu nhiên\n" +
-    "- Tìm Nữ: Tìm nữ chat cùng\n" +
-    "- Tìm Nam: Tìm nam chat cùng\n" +
-    "- Tìm LBGT: Tìm cộng đồng LGBT chat cùng",
+    "- Nam - Nữ: Nam tìm Nữ chat cùng\n" +
+    "- Nữ - Nam: Nữ tìm Nam chat cùng\n" +
+    "- Nam - Nam: Nam tìm Nam chat cùng\n" +
+    "- Nữ - Nữ: Nữ tìm Nữ chat cùng",
 
   START_OKAY:
     "[BOT] Đợi xíu nhé! Hệ thống sẽ thông báo ngay cho bạn khi tìm được ^.^",

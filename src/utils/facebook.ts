@@ -28,23 +28,24 @@ const heroku =
     ? new Heroku({ token: config.HEROKU_API_KEY })
     : null;
 
+//Đây là cái Menu (Em chỉ được phép chính sửa cái title - là 3 cái gạch đó) -> anh thử bỏ icon
 const persistent_menu = [
   {
     locale: "default",
     composer_input_disabled: false,
     call_to_actions: [
       {
-        title: "💔 Kết Thúc",
+        title: "Kết Thúc",
         type: "postback",
         payload: lang.KEYWORD_END,
       },
       {
-        title: "📞 Trợ Giúp",
+        title: "Trợ Giúp",
         type: "postback",
         payload: lang.KEYWORD_HELP,
       },
       {
-        title: "💌 Gửi phản hồi",
+        title: "Gửi phản hồi",
         type: "web_url",
         url: config.REPORT_LINK,
       },
@@ -52,10 +53,11 @@ const persistent_menu = [
   },
 ];
 
+//Đây chính là cái Action Button anh nói. Mình cũng chỉ chỉnh ở cái title thôi. A cũng bỏ cái icon luôn
 const quick_buttons_generic: Array<SendQuickReply> = [
   {
     content_type: "text",
-    title: "📞 Trợ giúp",
+    title: "Trợ giúp",
     payload: lang.KEYWORD_HELP,
   },
 ];
@@ -63,27 +65,27 @@ const quick_buttons_generic: Array<SendQuickReply> = [
 const quick_buttons_genders: Array<SendQuickReply> = [
   {
     content_type: "text",
-    title: "📩 Ngẫu nhiên",
+    title: "Ngẫu nhiên",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
   },
   {
     content_type: "text",
-    title: "Nữ 👩‍❤️‍👨 Nam",
+    title: "Nữ - Nam",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
   },
   {
     content_type: "text",
-    title: "Nam 👩‍❤️‍👨 Nữ",
+    title: "Nam - Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
   },
   {
     content_type: "text",
-    title: "Nam 👨‍❤️‍👨 Nam",
+    title: "Nam - Nam",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
   },
   {
     content_type: "text",
-    title: "Nữ 👩‍❤️‍👩 Nữ",
+    title: "Nữ - Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
   },
 ];

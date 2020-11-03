@@ -370,6 +370,7 @@ const sendTextMessage = async (
  * @param showStartButton - Should show start button
  * @param showReportButton - Should show report button
  * @param showGenericButton - Should show generic button
+ * @param showCofirmButton - Should show confirm button
  * @param showGenderButton - Should show gender button
  * @param usePersona - Should send with persona
  */
@@ -379,8 +380,8 @@ const sendTextButtons = async (
   showStartButton: boolean,
   showReportButton: boolean,
   showGenericButton: boolean,
-  showCofirmButton: boolean,
   showGenderButton: boolean,
+  showCofirmButton: boolean,
   usePersona: boolean
 ): Promise<void> => {
   const buttons = [];
@@ -409,7 +410,7 @@ const sendTextButtons = async (
   if (showCofirmButton) {
     quick_replies = quick_replies.concat(quick_buttons_confirm);
   }
-  
+
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
   }

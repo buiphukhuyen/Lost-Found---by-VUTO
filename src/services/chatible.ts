@@ -363,7 +363,6 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
   } else if (waitState && sender2 === null) {
     // in wait room and waiting
     if (command === lang.KEYWORD_END) {
-     
         await db.removeFromWaitRoom(sender);
         await fb.sendTextButtons(
           sender,
@@ -371,11 +370,11 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
           true,
           false,
           true,
-          true,false,
+          true,
+          false,
           false
         );
-      
-            
+         
     } else if (command === lang.KEYWORD_HELP) {
       await fb.sendTextButtons(
         sender,
@@ -405,10 +404,10 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
        await fb.sendTextButtons(
           sender,
           lang.END_CHAT_CONFIRM,
-          true,
           false,
-          true,
-          true,
+          false,
+          false,
+          false,
           true,
           false
         );

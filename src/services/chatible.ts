@@ -411,10 +411,15 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
           true,
           false
         );
-      if(command === lang.KEYWORD_CONFIRM) {
-        await processEndChat(sender, sender2);
-      }
-    } else if (
+      
+    }
+    else if(command === lang.KEYWORD_CONFIRM) {
+      await processEndChat(sender, sender2);
+    }
+    else if(command === lang.KEYWORD_CANCEL) {
+       await fb.sendTextMessage("", sender, lang.END_CHAT_CANCEL, false);
+    }
+    else if (
       command === lang.KEYWORD_START ||
       command === lang.KEYWORD_FIND_MALE ||
       command === lang.KEYWORD_FIND_FEMALE ||

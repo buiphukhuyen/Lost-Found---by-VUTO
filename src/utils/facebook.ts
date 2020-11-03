@@ -67,6 +67,11 @@ const quick_buttons_confirm: Array<SendQuickReply> = [
     title: "Xác nhận",
     payload: lang.KEYWORD_CONFIRM,
   },
+  {
+    content_type: "text",
+    title: "Từ chối",
+    payload: lang.KEYWORD_CANCEL,
+  },
 ];
 const quick_buttons_genders: Array<SendQuickReply> = [
   {

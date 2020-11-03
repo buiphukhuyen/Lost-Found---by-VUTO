@@ -47,6 +47,9 @@ export default {
   
   END_CHAT_CONFIRM:
     '[BOT] Bạn có chắc chắn muốn kết thúc?',
+
+  END_CHAT_CANCEL:
+    '[BOT] Bạn đã từ chối kết thúc Chat! Có thể tiếp tục cuộc trò chuyện này.',  
       
   //Được Edit (TB khi kết thúc chat - ở phía bên được kết thúc)
   END_CHAT_PARTNER:
@@ -77,7 +80,8 @@ export default {
   //Phần này cũng TUYỆT ĐỐI không được Edit
   KEYWORD_START: "batdau",
   KEYWORD_END: "ketthuc",
-  KEYWORD_CONFIRM: 'xacnhan',
+  KEYWORD_CONFIRM: 'xacnhanketthuc',
+  KEYWORD_CANCEL: 'tuchoiketthuc',
   KEYWORD_GENDER: "tim",
   KEYWORD_FIND_BOTH: "timnamnu",
   KEYWORD_FIND_MALE: "timnam",

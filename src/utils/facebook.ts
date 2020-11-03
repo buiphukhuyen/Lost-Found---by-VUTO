@@ -61,7 +61,13 @@ const quick_buttons_generic: Array<SendQuickReply> = [
     payload: lang.KEYWORD_HELP,
   },
 ];
-
+const quick_buttons_confirm: Array<SendQuickReply> = [
+  {
+    content_type: "text",
+    title: "Xác nhận",
+    payload: lang.KEYWORD_CONFIRM,
+  },
+];
 const quick_buttons_genders: Array<SendQuickReply> = [
   {
     content_type: "text",
@@ -308,6 +314,7 @@ const sendMessage = async (
  * @param showGenderButton - Should show gender button
  * @param usePersona - Should send with persona
  */
+
 const sendAttachment = async (
   sender: string,
   receiver: string,
@@ -321,6 +328,7 @@ const sendAttachment = async (
   if (showGenericButton) {
     quick_replies = quick_replies.concat(quick_buttons_generic);
   }
+  
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
   }
@@ -332,7 +340,7 @@ const sendAttachment = async (
     },
   };
 
-  if (showGenericButton || showGenderButton) {
+  if (showGenericButton || showGenderButton ) {
     message.quick_replies = quick_replies;
   }
 
@@ -371,6 +379,7 @@ const sendTextButtons = async (
   showStartButton: boolean,
   showReportButton: boolean,
   showGenericButton: boolean,
+  showCofirmButton: boolean,
   showGenderButton: boolean,
   usePersona: boolean
 ): Promise<void> => {
@@ -396,13 +405,18 @@ const sendTextButtons = async (
   if (showGenericButton) {
     quick_replies = quick_replies.concat(quick_buttons_generic);
   }
+
+  if (showCofirmButton) {
+    quick_replies = quick_replies.concat(quick_buttons_confirm);
+  }
+  
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
   }
 
   const messageData: SendMessageObject = {};
 
-  if (showGenericButton || showGenderButton) {
+  if (showGenericButton || showGenderButton || showCofirmButton) {
     messageData.quick_replies = quick_replies;
   }
 

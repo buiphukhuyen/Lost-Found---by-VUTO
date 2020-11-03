@@ -45,6 +45,9 @@ export default {
   END_CHAT:
     '[BOT] Kết thúc Chat!\nGửi "Bắt đầu chat" hoặc Chọn nút bên dưới để tìm bạn chat. \n[Bổ sung]Hãy Gửi yêu cầu trong trường hợp phát hiện lỗi hay bị quấy rối',
   
+  END_CHAT_CONFIRM:
+    '[BOT] Bạn có chắc chắn muốn kết thúc?',
+      
   //Được Edit (TB khi kết thúc chat - ở phía bên được kết thúc)
   END_CHAT_PARTNER:
     '[BOT] Hic! Bạn ý đã ngắt kết nối rồi \nGửi "Bắt đầu chat" hoặc bấm vào nút để Tìm bạn Chat mới nha!',
@@ -74,6 +77,7 @@ export default {
   //Phần này cũng TUYỆT ĐỐI không được Edit
   KEYWORD_START: "batdau",
   KEYWORD_END: "ketthuc",
+  KEYWORD_CONFIRM: 'xacnhan',
   KEYWORD_GENDER: "tim",
   KEYWORD_FIND_BOTH: "timnamnu",
   KEYWORD_FIND_MALE: "timnam",

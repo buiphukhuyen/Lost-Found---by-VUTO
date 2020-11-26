@@ -8,7 +8,7 @@ export default {
     "[VUTO] Chào mừng bạn đến với Lost Found - By Vuto. Hãy chọn mode để chat với người lạ.\n\nẤn trợ giúp (hoặc gửi Trợ giúp) để xem thêm.",
   //Được Edit (Thông báo đầu tiên sau mở đầu)
   INSTRUCTION:
-    '[VUTO] Gửi "Bắt đầu chat" để trò chuyện cùng người ấy nè.',
+    '[VUTO] Gửi "Bắt đầu chat" để trò chuyện cùng người ấy nhaaa.',
   //Được Edit (Thông báo khi ấn vào nút "Trợ giúp")
   HELP_TXT:
     "[VUTO] Danh sách các lệnh:\n" +

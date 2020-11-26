@@ -441,7 +441,7 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
     } else {
       if (event.read) {
         await fb.sendSeenIndicator(sender2);
-      } else if (text.trim().toLowerCase().startsWith("[🤖]")) {
+      } else if (text.trim().toLowerCase().startsWith("[vuto]")) {
         await fb.sendTextMessage("", sender, lang.ERR_FAKE_MSG, false);
       } else {
         await forwardMessage(sender, sender2, event.message);

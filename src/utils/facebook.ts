@@ -330,10 +330,6 @@ const sendAttachment = async (
   usePersona: boolean
 ): Promise<void> => {
   let quick_replies: Array<SendQuickReply> = [];
-  if (showGenericButton) {
-    quick_replies = quick_replies.concat(quick_buttons_generic);
-  }
-  
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
   }
@@ -408,10 +404,6 @@ const sendTextButtons = async (
   }
 
   let quick_replies: Array<SendQuickReply> = [];
-  if (showGenericButton) {
-    quick_replies = quick_replies.concat(quick_buttons_generic);
-  }
-
   if (showCofirmButton) {
     quick_replies = quick_replies.concat(quick_buttons_confirm);
   }

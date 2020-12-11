@@ -68,7 +68,7 @@ export default {
     "[VUTO] Lỗi: Giới tính nhập vào không hợp lệ!\n\nẤn trợ giúp (hoặc gửi Trợ giúp) để xem thêm.",
   GENDER_WRITE_OK: "[VUTO] Lost & Found đang kết nối nè. Tí nhớ hỏi người ta sống sao giữa tuyết lạnh và covid nhé.",
   GENDER_WRITE_WARN:
-    "\n[Thông tin thêm] Like Page và Join Group để xem các tính năng mới nha!",
+    "\n[Thông tin thêm] Like page và join group để tìm lại nhau nhé!",
   
   //Phần này TUYỆT ĐỐI không được Edit (Vì đây là Keyword)
   GENDER_ARR_UNKNOWN: "Cả hai",

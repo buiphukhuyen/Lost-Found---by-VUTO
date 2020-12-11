@@ -14,13 +14,13 @@ export default {
     "[VUTO] Danh sách các lệnh:\n" +
     "- Bắt đầu chat: Bắt đầu tìm bạn chat\n" +
     "- Kết thúc: Kết thúc chat\n" +
-    "- Trợ giúp: Xem trợ giúp\n" +
     " Các lệnh có thể dùng khi đang không chat:\n" +
-    "- Chat ngẫu nhiên: Tìm bạn ngẫu nhiên\n" +
-    "- Nam - Nữ: Nam tìm Nữ chat cùng\n" +
-    "- Nữ - Nam: Nữ tìm Nam chat cùng\n" +
-    "- Nam - Nam: Nam tìm Nam chat cùng\n" +
-    "- Nữ - Nữ: Nữ tìm Nữ chat cùng",
+    "- Nam -> Nữ: Nam tìm Nữ chat cùng\n" +
+    "- Nữ -> Nam: Nữ tìm Nam chat cùng\n" +
+    "- Nam -> Nam: Nam tìm Nam chat cùng\n" +
+    "- Nữ -> Nữ: Nữ tìm Nữ chat cùng" +
+    "- Trợ giúp: Xem trợ giúp\n" +
+    "- Chat ngẫu nhiên: Tìm bạn ngẫu nhiên\n" ,
 
   //Được Edit (Thông báo khi ấn vào nút "Tìm" (Nam, Nữ, Ngẫu nhiên))
   START_OKAY:

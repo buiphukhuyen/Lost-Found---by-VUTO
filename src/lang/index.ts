@@ -19,8 +19,8 @@ export default {
     "- Nữ -> Nam: Nữ tìm Nam chat cùng\n" +
     "- Nam -> Nam: Nam tìm Nam chat cùng\n" +
     "- Nữ -> Nữ: Nữ tìm Nữ chat cùng" +
-    "- Trợ giúp: Xem trợ giúp\n" +
     "- Chat ngẫu nhiên: Tìm bạn ngẫu nhiên\n" ,
+
 
   //Được Edit (Thông báo khi ấn vào nút "Tìm" (Nam, Nữ, Ngẫu nhiên))
   START_OKAY:

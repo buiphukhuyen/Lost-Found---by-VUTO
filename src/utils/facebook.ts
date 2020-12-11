@@ -81,22 +81,22 @@ const quick_buttons_genders: Array<SendQuickReply> = [
   },
   {
     content_type: "text",
-    title: "Nữ - Nam",
+    title: "Nữ -> Nam",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
   },
   {
     content_type: "text",
-    title: "Nam - Nữ",
+    title: "Nam -> Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
   },
   {
     content_type: "text",
-    title: "Nam - Nam",
+    title: "Nam -> Nam",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
   },
   {
     content_type: "text",
-    title: "Nữ - Nữ",
+    title: "Nữ -> Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
   },
 ];

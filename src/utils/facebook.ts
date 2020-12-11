@@ -76,11 +76,6 @@ const quick_buttons_confirm: Array<SendQuickReply> = [
 const quick_buttons_genders: Array<SendQuickReply> = [
   {
     content_type: "text",
-    title: "Ngẫu nhiên",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
-  },
-  {
-    content_type: "text",
     title: "Nữ -> Nam",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
   },
@@ -99,6 +94,11 @@ const quick_buttons_genders: Array<SendQuickReply> = [
     title: "Nữ -> Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
   },
+  {
+    content_type: "text",
+    title: "Ngẫu nhiên",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
+  }
 ];
 
 const setPersona = async (): Promise<void> => {

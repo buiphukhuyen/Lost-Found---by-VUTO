@@ -40,6 +40,26 @@ const persistent_menu = [
         payload: lang.KEYWORD_END,
       },
       {
+        type: "postback",
+        title: "Nữ - Nam",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
+      },
+      {
+        type: "postback",
+        title: "Nam - Nữ",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
+      },
+      {
+        type: "postback",
+        title: "Nam - Nam",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
+      },
+      {
+        type: "postback",
+        title: "Nữ - Nữ",
+        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
+      },
+      {
         title: "Trợ Giúp",
         type: "postback",
         payload: lang.KEYWORD_HELP,
@@ -61,44 +81,33 @@ const quick_buttons_generic: Array<SendQuickReply> = [
     payload: lang.KEYWORD_HELP,
   },
 ];
-const quick_buttons_confirm: Array<SendQuickReply> = [
-  {
-    content_type: "text",
-    title: "Xác nhận",
-    payload: lang.KEYWORD_CONFIRM,
-  },
-  {
-    content_type: "text",
-    title: "Từ chối",
-    payload: lang.KEYWORD_CANCEL,
-  },
-];
+
 const quick_buttons_genders: Array<SendQuickReply> = [
-  {
-    content_type: "text",
-    title: "Nữ -> Nam",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
-  },
-  {
-    content_type: "text",
-    title: "Nam -> Nữ",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
-  },
-  {
-    content_type: "text",
-    title: "Nam -> Nam",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
-  },
-  {
-    content_type: "text",
-    title: "Nữ -> Nữ",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
-  },
   {
     content_type: "text",
     title: "Ngẫu nhiên",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
-  }
+  },
+  {
+    content_type: "text",
+    title: "Nữ - Nam",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
+  },
+  {
+    content_type: "text",
+    title: "Nam - Nữ",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
+  },
+  {
+    content_type: "text",
+    title: "Nam - Nam",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
+  },
+  {
+    content_type: "text",
+    title: "Nữ - Nữ",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
+  },
 ];
 
 const setPersona = async (): Promise<void> => {
@@ -319,7 +328,6 @@ const sendMessage = async (
  * @param showGenderButton - Should show gender button
  * @param usePersona - Should send with persona
  */
-
 const sendAttachment = async (
   sender: string,
   receiver: string,
@@ -330,6 +338,9 @@ const sendAttachment = async (
   usePersona: boolean
 ): Promise<void> => {
   let quick_replies: Array<SendQuickReply> = [];
+  if (showGenericButton) {
+    quick_replies = quick_replies.concat(quick_buttons_generic);
+  }
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
   }
@@ -341,7 +352,7 @@ const sendAttachment = async (
     },
   };
 
-  if (showGenericButton || showGenderButton ) {
+  if (showGenericButton || showGenderButton) {
     message.quick_replies = quick_replies;
   }
 
@@ -371,7 +382,6 @@ const sendTextMessage = async (
  * @param showStartButton - Should show start button
  * @param showReportButton - Should show report button
  * @param showGenericButton - Should show generic button
- * @param showCofirmButton - Should show confirm button
  * @param showGenderButton - Should show gender button
  * @param usePersona - Should send with persona
  */
@@ -382,7 +392,6 @@ const sendTextButtons = async (
   showReportButton: boolean,
   showGenericButton: boolean,
   showGenderButton: boolean,
-  showCofirmButton: boolean,
   usePersona: boolean
 ): Promise<void> => {
   const buttons = [];
@@ -404,17 +413,16 @@ const sendTextButtons = async (
   }
 
   let quick_replies: Array<SendQuickReply> = [];
-  if (showCofirmButton) {
-    quick_replies = quick_replies.concat(quick_buttons_confirm);
+  if (showGenericButton) {
+    quick_replies = quick_replies.concat(quick_buttons_generic);
   }
-
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
   }
 
   const messageData: SendMessageObject = {};
 
-  if (showGenericButton || showGenderButton || showCofirmButton) {
+  if (showGenericButton || showGenderButton) {
     messageData.quick_replies = quick_replies;
   }
 

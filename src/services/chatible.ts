@@ -157,7 +157,7 @@ const findPair = async (id: string, myGender: GenderEnum): Promise<void> => {
  */
 const processEndChat = async (id1: string, id2: string): Promise<void> => {
   await db.removeFromChatRoom(id1); // or await db.removeFromChatRoom(id2);
-  await fb.sendTextButtons(id1, lang.END_CHAT, true, true, true, true, false, false);
+  await fb.sendTextButtons(id1, lang.END_CHAT, true, true, true, true, false);
   await fb.sendTextButtons(
     id2,
     lang.END_CHAT_PARTNER,
@@ -165,7 +165,6 @@ const processEndChat = async (id1: string, id2: string): Promise<void> => {
     true,
     true,
     true,
-    false,
     false
   );
 };
@@ -285,7 +284,6 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
       false,
       true,
       true,
-      false,
       false
     );
     return;
@@ -310,7 +308,6 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
           false,
           true,
           true,
-          false,
           false
         );
       } else {
@@ -345,7 +342,6 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
         false,
         true,
         true,
-        false,
         false
       );
     } else if (!event.read) {
@@ -356,25 +352,22 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
         false,
         true,
         true,
-        false,
         false
       );
     }
   } else if (waitState && sender2 === null) {
     // in wait room and waiting
     if (command === lang.KEYWORD_END) {
-        await db.removeFromWaitRoom(sender);
-        await fb.sendTextButtons(
-          sender,
-          lang.END_CHAT,
-          true,
-          false,
-          true,
-          true,
-          false,
-          false
-        );
-         
+      await db.removeFromWaitRoom(sender);
+      await fb.sendTextButtons(
+        sender,
+        lang.END_CHAT,
+        true,
+        false,
+        true,
+        true,
+        false
+      );
     } else if (command === lang.KEYWORD_HELP) {
       await fb.sendTextButtons(
         sender,
@@ -382,7 +375,6 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
         false,
         false,
         true,
-        false,
         false,
         false
       );
@@ -394,32 +386,14 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
         false,
         true,
         false,
-        false,
         false
       );
     }
   } else if (!waitState && sender2 !== null) {
     // in chat room
     if (command === lang.KEYWORD_END) {
-       await fb.sendTextButtons(
-          sender,
-          lang.END_CHAT_CONFIRM,
-          false,
-          false,
-          false,
-          false,
-          true,
-          false
-        );
-      
-    }
-    else if(command === lang.KEYWORD_CONFIRM) {
       await processEndChat(sender, sender2);
-    }
-    else if(command === lang.KEYWORD_CANCEL) {
-       await fb.sendTextMessage("", sender, lang.END_CHAT_CANCEL, false);
-    }
-    else if (
+    } else if (
       command === lang.KEYWORD_START ||
       command === lang.KEYWORD_FIND_MALE ||
       command === lang.KEYWORD_FIND_FEMALE ||
@@ -435,13 +409,12 @@ const processEvent = async (event: WebhookMessagingEvent): Promise<void> => {
         true,
         true,
         false,
-        false,
         false
       );
     } else {
       if (event.read) {
         await fb.sendSeenIndicator(sender2);
-      } else if (text.trim().toLowerCase().startsWith("[vuto]")) {
+      } else if (text.trim().toLowerCase().startsWith("[🤖]")) {
         await fb.sendTextMessage("", sender, lang.ERR_FAKE_MSG, false);
       } else {
         await forwardMessage(sender, sender2, event.message);
@@ -475,7 +448,6 @@ const removeTimeoutUser = async (): Promise<void> => {
         false,
         true,
         true,
-        false,
         false
       );
     }

@@ -40,14 +40,14 @@ const persistent_menu = [
         payload: lang.KEYWORD_END,
       },
       {
-        title: "Trợ Giúp",
-        type: "postback",
-        payload: lang.KEYWORD_HELP,
-      },
-      {
         title: "Gửi phản hồi",
         type: "web_url",
         url: config.REPORT_LINK,
+      },
+      {
+        title: "Trợ Giúp",
+        type: "postback",
+        payload: lang.KEYWORD_HELP,
       },
     ],
   },
@@ -320,7 +320,7 @@ const sendAttachment = async (
 ): Promise<void> => {
   let quick_replies: Array<SendQuickReply> = [];
   if (showGenericButton) {
-    quick_replies = quick_replies.concat(quick_buttons_generic);
+   // quick_replies = quick_replies.concat(quick_buttons_generic);
   }
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);
@@ -395,7 +395,7 @@ const sendTextButtons = async (
 
   let quick_replies: Array<SendQuickReply> = [];
   if (showGenericButton) {
-    quick_replies = quick_replies.concat(quick_buttons_generic);
+   // quick_replies = quick_replies.concat(quick_buttons_generic);
   }
   if (showGenderButton) {
     quick_replies = quick_replies.concat(quick_buttons_genders);

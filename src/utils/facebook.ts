@@ -40,26 +40,6 @@ const persistent_menu = [
         payload: lang.KEYWORD_END,
       },
       {
-        type: "postback",
-        title: "Nữ - Nam",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_MALE,
-      },
-      {
-        type: "postback",
-        title: "Nam - Nữ",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
-      },
-      {
-        type: "postback",
-        title: "Nam - Nam",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_GAY,
-      },
-      {
-        type: "postback",
-        title: "Nữ - Nữ",
-        payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_LES,
-      },
-      {
         title: "Trợ Giúp",
         type: "postback",
         payload: lang.KEYWORD_HELP,
@@ -83,11 +63,7 @@ const quick_buttons_generic: Array<SendQuickReply> = [
 ];
 
 const quick_buttons_genders: Array<SendQuickReply> = [
-  {
-    content_type: "text",
-    title: "Ngẫu nhiên",
-    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
-  },
+  
   {
     content_type: "text",
     title: "Nữ - Nam",
@@ -97,6 +73,11 @@ const quick_buttons_genders: Array<SendQuickReply> = [
     content_type: "text",
     title: "Nam - Nữ",
     payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_FEMALE,
+  },
+  {
+    content_type: "text",
+    title: "Xàm Xì - Than Thở",
+    payload: lang.KEYWORD_GENDER + lang.KEYWORD_GENDER_BOTH,
   },
   {
     content_type: "text",
@@ -156,7 +137,7 @@ const setPersona = async (): Promise<void> => {
   const payload = {
     name: "Người lạ",
     profile_picture_url:
-      "https://onthitracnghiem.online/uploads/aztest.vn/lostfound.jpg",
+      "https://onthitracnghiem.online/uploads/aztest.vn/logo_vuto.jpg",
   };
 
   try {
